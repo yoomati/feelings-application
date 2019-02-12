@@ -5,11 +5,11 @@ This project is for people who want to express their emotions. everyone can come
 
 ##Library what i used
 
- -React Router Dom
- -Redux
- -Moment js
- -React Redux Firebase
- -Redux Firestore
+ React Router Dom,
+ Redux,
+ Moment js,
+ React Redux Firebase,
+ Redux Firestore
  
  
  ##Hosting
