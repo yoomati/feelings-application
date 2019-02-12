@@ -1,9 +1,12 @@
 ## Feelings application
 
+## Demo
+https://shareit-cf39d.firebaseapp.com/
+
 This project is for people who want to express their emotions. everyone can come on and wrote what feel.
 
 
-##Library what i used
+## Library what i used
 
  React Router Dom,
  Redux,
@@ -12,6 +15,6 @@ This project is for people who want to express their emotions. everyone can come
  Redux Firestore
  
  
- ##Hosting
+ ## Hosting
  
 I used Firebase to host application
