@@ -12,3 +12,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.comments{
+  overflow-x:hidden;
+  max-height:150px;
+}
+
+.spaceDate{
+  padding-left:20px;
+}
