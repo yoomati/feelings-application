@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const SignedOutLinks = (props) => {
+    console.log(props)
     return (
         <ul className="right">
             <li>
@@ -13,12 +14,17 @@ const SignedOutLinks = (props) => {
                 <Link to="/signin" onClick={props.signOut}>Sign Out</Link>
             </li>
             <li>
-                <button className="btn-floating">NN</button>
+                <button className="btn-floating">{props.profile.initials}</button>
             </li>
         </ul>
     )
 }
 
+const mapStateToProps = (state) => {
+    return {
+        profile: state.firebase.profile
+    }
+}
 
 const mapDispatchToProps = (dispatch) => {
 
@@ -30,6 +36,6 @@ const mapDispatchToProps = (dispatch) => {
 
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps,
 )(SignedOutLinks);

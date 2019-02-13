@@ -12,8 +12,8 @@ class Settings extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.props)
-        this.props.changeName(this.state)
+        this.props.changeName(this.state);
+        this.props.history.push('/');
     }
 
     componentDidMount() {

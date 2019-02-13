@@ -26,7 +26,14 @@ class SinglePost extends Component {
 
     render() {
         const { project } = this.props;
-        const comments = project.comments ? project.comments.map(comment => {
+        if (project.comments !== undefined) {
+            if (project.comments.length >= 2) {
+                project.comments.sort((a, b) => b.createdAt.seconds - a.createdAt.seconds)
+                console.log('sortejszons')
+            }
+        }
+
+        const comments = project.comments.length > 0 ? project.comments.map(comment => {
             return (
                 <div className="row" key={comment.id}>
                     <div className="col s8 l6">
