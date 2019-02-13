@@ -29,10 +29,12 @@ export const addComment = (comment) => {
         })
         const project1 = project[0].comments;
         const profile = state.firebase.profile;
+        const auth = state.firebase.auth;
         console.log(profile);
 
         const comment1 = {
             id: project1.length,
+            authorId: auth.uid,
             content: comment.text,
             authorFirstName: profile.firstName,
             authorLastName: profile.lastName,

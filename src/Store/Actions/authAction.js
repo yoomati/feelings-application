@@ -46,3 +46,60 @@ export const signOut = () => {
             })
     }
 }
+
+export const changeName = (name) => {
+    return (dispatch, getState, { getFirestore }) => {
+        const firestore = getFirestore();
+        const state = getState();
+        const auth = state.firebase.auth;
+        const project = state.firestore.ordered.project;
+
+        firestore.collection('user').doc(auth.uid).set({
+            firstName: name.firstName,
+            lastName: name.lastName
+        }).then(() => {
+            project.map(project => {
+                if (project.authorId == auth.uid) {
+                    firestore.collection('project').doc(project.id).set({
+                        ...project,
+                        authorFirstName: name.firstName,
+                        authorLastName: name.lastName
+                    })
+                }
+                project.comments.map(comment => {
+                    if (comment.authorId == auth.uid) {
+
+                        let changeComment = comment;
+                        changeComment = {
+                            ...changeComment,
+                            authorFirstName: name.firstName,
+                            authorLastName: name.lastName
+                        }
+                        const allComments = [...project.comments];
+                        allComments[comment.id] = changeComment;
+                        if (project.authorId == auth.uid) {
+                            firestore.collection('project').doc(project.id).set({
+                                ...project,
+                                authorFirstName: name.firstName,
+                                authorLastName: name.lastName,
+                                comments: [
+                                    ...allComments
+                                ]
+
+                            })
+                        }
+                        else {
+                            firestore.collection('project').doc(project.id).set({
+                                ...project,
+                                comments: [
+                                    ...allComments
+                                ]
+
+                            })
+                        }
+                    }
+                })
+            })
+        })
+    }
+}

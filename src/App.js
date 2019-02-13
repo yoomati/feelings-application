@@ -5,6 +5,7 @@ import Dashboard from './Component/Dashboard/Dashboard';
 import SignIn from './Component/Auth/SignIn';
 import SignUp from './Component/Auth/SignUp';
 import ErrorPage from './Component/Layout/ErrorPage';
+import Settings from './Component/Profile/Settings';
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
             <Route exact path="/" component={Dashboard} />
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />
+            <Route path="/settings" component={Settings} />
             <Route component={ErrorPage}></Route>
           </Switch>
         </div>

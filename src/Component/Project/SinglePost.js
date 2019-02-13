@@ -26,7 +26,7 @@ class SinglePost extends Component {
 
     render() {
         const { project } = this.props;
-        const comments = project.comments.length > 0 ? project.comments.map(comment => {
+        const comments = project.comments ? project.comments.map(comment => {
             return (
                 <div className="row" key={comment.id}>
                     <div className="col s8 l6">
