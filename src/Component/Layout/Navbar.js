@@ -23,7 +23,7 @@ const Navbar = (props) => {
                 <div className="container">
                     <ul className="left ">
                         <li >
-                            <NavLink to="/" className="brand-logo left hide-on-small-only">Dashboard</NavLink>
+                            <NavLink to="/" className="brand-logo left hide-on-med-and-down">Dashboard</NavLink>
                             <NavLink to="/" className="brand-logo left show-on-small-only">Dashboard</NavLink>
                         </li>
                     </ul>
