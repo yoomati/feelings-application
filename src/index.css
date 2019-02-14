@@ -18,3 +18,6 @@ code {
   max-height:150px;
 }
 
+.show-on-small-only{
+  font-size: 20px !important;
+}

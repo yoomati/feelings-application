@@ -7,15 +7,31 @@ class SinglePost extends Component {
 
     state = {
         text: "",
+        error: "",
         projectId: this.props.project.id
     }
 
     handleSubmit = (e) => {
+        const { error, ...noError } = this.state;
         e.preventDefault();
-        this.props.addComment(this.state);
-        this.setState({
-            text: ""
-        })
+        if (this.state.text.length >= 1) {
+            this.props.addComment(noError);
+            this.setState({
+                text: "",
+                error: ""
+            })
+        }
+        else {
+            let that = this;
+            this.setState({
+                error: "write something "
+            })
+            setTimeout(function () {
+                that.setState({
+                    error: ""
+                })
+            }, 5000)
+        }
     }
 
     handleChange = (e) => {
@@ -29,7 +45,7 @@ class SinglePost extends Component {
         if (project.comments !== undefined) {
             if (project.comments.length >= 2) {
                 project.comments.sort((a, b) => b.createdAt.seconds - a.createdAt.seconds)
-                console.log('sortejszons')
+
             }
         }
 
@@ -71,6 +87,7 @@ class SinglePost extends Component {
                                 <i className="material-icons right">send</i>
                                     </button>
                                 </div>
+                                {this.state.error && (<p className="red-text"> {this.state.error}</p>)}
                             </div>
                         </div>
                     </form>

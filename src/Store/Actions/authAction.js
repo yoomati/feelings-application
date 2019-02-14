@@ -58,6 +58,7 @@ export const changeName = (name) => {
             firstName: name.firstName,
             lastName: name.lastName
         }).then(() => {
+            let array = [];
             if (project !== undefined) {
                 project.map(project => {
                     if (project.authorId == auth.uid) {
@@ -67,24 +68,27 @@ export const changeName = (name) => {
                             authorLastName: name.lastName
                         })
                     }
-                    project.comments.map(comment => {
+                    project.comments.map((comment, index) => {
                         if (comment.authorId == auth.uid) {
 
-                            let changeComment = comment;
-                            changeComment = {
-                                ...changeComment,
+                            let allComments = [...project.comments];
+
+
+                            const newComment = {
+                                ...comment,
                                 authorFirstName: name.firstName,
                                 authorLastName: name.lastName
                             }
-                            const allComments = [...project.comments];
-                            allComments[comment.id] = changeComment;
+                            array.push(newComment);
+
+
                             if (project.authorId == auth.uid) {
                                 firestore.collection('project').doc(project.id).set({
                                     ...project,
                                     authorFirstName: name.firstName,
                                     authorLastName: name.lastName,
                                     comments: [
-                                        ...allComments
+                                        ...array
                                     ]
                                 })
                             }
@@ -92,11 +96,14 @@ export const changeName = (name) => {
                                 firestore.collection('project').doc(project.id).set({
                                     ...project,
                                     comments: [
-                                        ...allComments
+                                        ...array
                                     ]
 
                                 })
                             }
+                        }
+                        else {
+                            array.push(comment);
                         }
                     })
                 })

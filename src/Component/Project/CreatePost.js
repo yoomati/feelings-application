@@ -4,15 +4,31 @@ import { createProject } from '../../Store/Actions/projectAction';
 
 class CreatePost extends Component {
     state = {
-        content: ''
+        content: '',
+        error: ""
     }
 
     handleSubmit = (e) => {
+        const { error, ...noError } = this.state;
         e.preventDefault();
-        this.props.createPost(this.state);
-        this.setState({
-            content: "",
-        })
+        if (this.state.content.length >= 3) {
+            this.props.createPost(noError);
+            this.setState({
+                content: "",
+                error: ""
+            })
+        }
+        else {
+            let that = this;
+            this.setState({
+                error: "write something "
+            })
+            setTimeout(function () {
+                that.setState({
+                    error: ""
+                })
+            }, 5000)
+        }
     }
 
     handleChange = (e) => {
@@ -31,7 +47,10 @@ class CreatePost extends Component {
                 </div>
                 <div className="input-field">
                     <button className="btn pink lighten-2"> Add Post</button>
+
                 </div>
+                {this.state.error && (<p className="red-text"> {this.state.error}</p>)}
+
 
             </form >
         )
