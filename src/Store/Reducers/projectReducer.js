@@ -28,10 +28,8 @@ const initState = {
 const projectReducer = (state = initState, action) => {
     switch (action.type) {
         case "CREATE_NEW_POST":
-            console.log('created new post');
             return state;
         case "ERROR_CREATE_NEW_POST":
-            console.log('error created new post', action.err)
             return state;
         default:
             return state;
